@@ -1,28 +1,18 @@
 <?php
+/**
+ * Theme bootstrap.
+ *
+ * Keeps WordPress hooks small and delegates framework behavior to focused files.
+ */
 
-function simple_theme_setup() {
-
-    add_theme_support('title-tag');
-
-    add_theme_support('post-thumbnails');
-
-    register_nav_menus(array(
-        'primary' => __('Primary Menu')
-    ));
+if (! defined('ABSPATH')) {
+    exit;
 }
 
-add_action('after_setup_theme', 'simple_theme_setup');
+define('SLS_THEME_VERSION', '1.1.0');
+define('SLS_THEME_PATH', get_template_directory());
+define('SLS_THEME_URI', get_template_directory_uri());
 
-
-function simple_theme_assets() {
-
-    wp_enqueue_style(
-        'simple-style',
-        get_stylesheet_uri(),
-        array(),
-        '1.0'
-    );
-
-}
-
-add_action('wp_enqueue_scripts', 'simple_theme_assets');
+require_once SLS_THEME_PATH . '/inc/setup.php';
+require_once SLS_THEME_PATH . '/inc/section-engine.php';
+require_once SLS_THEME_PATH . '/inc/admin-section-builder.php';

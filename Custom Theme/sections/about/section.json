@@ -1,0 +1,56 @@
+{
+    "slug": "about",
+    "name": "About",
+    "description": "Two-column content section for explaining the framework or business.",
+    "version": "1.0.0",
+    "assets": {
+        "style": "style.css"
+    },
+    "fields": {
+        "eyebrow": {
+            "label": "Eyebrow",
+            "type": "text",
+            "default": "About the system"
+        },
+        "heading": {
+            "label": "Heading",
+            "type": "text",
+            "default": "Clean global styles with section-specific code only where needed."
+        },
+        "content": {
+            "label": "Content",
+            "type": "textarea",
+            "default": "This demo uses a central design system for typography, spacing, colors, buttons, and containers. Each section owns only the PHP, CSS, JavaScript, and JSON schema relevant to that section, so future sections can scale without bloating the whole theme."
+        },
+        "feature_one": {
+            "label": "Feature one",
+            "type": "text",
+            "default": "Dynamic section loading"
+        },
+        "feature_two": {
+            "label": "Feature two",
+            "type": "text",
+            "default": "REST API-ready JSON data"
+        },
+        "feature_three": {
+            "label": "Feature three",
+            "type": "text",
+            "default": "No Elementor, ACF, or shortcodes"
+        },
+        "image": {
+            "label": "About image",
+            "type": "image",
+            "default": 0
+        },
+        "image_alt": {
+            "label": "Image alt text",
+            "type": "text",
+            "default": "Team planning a modular website framework"
+        },
+        "background_color": {
+            "label": "Background color",
+            "type": "color",
+            "default": "#ffffff"
+        }
+    }
+}

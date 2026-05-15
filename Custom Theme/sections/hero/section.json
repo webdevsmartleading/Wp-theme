@@ -1,0 +1,57 @@
+{
+    "slug": "hero",
+    "name": "Hero",
+    "description": "Primary landing section with headline, copy, CTA, and optional image.",
+    "version": "1.0.0",
+    "assets": {
+        "style": "style.css",
+        "script": "script.js"
+    },
+    "fields": {
+        "eyebrow": {
+            "label": "Eyebrow",
+            "type": "text",
+            "default": "Custom modular WordPress framework"
+        },
+        "heading": {
+            "label": "Heading",
+            "type": "text",
+            "default": "Build fast pages with reusable lightweight sections."
+        },
+        "content": {
+            "label": "Content",
+            "type": "textarea",
+            "default": "A low-code section system inspired by Shopify themes, built with clean PHP, JSON schemas, global design tokens, and dynamic asset loading."
+        },
+        "button_label": {
+            "label": "Button label",
+            "type": "text",
+            "default": "Explore the framework"
+        },
+        "button_url": {
+            "label": "Button URL",
+            "type": "url",
+            "default": "#about-framework"
+        },
+        "image": {
+            "label": "Hero image",
+            "type": "image",
+            "default": 0
+        },
+        "image_alt": {
+            "label": "Image alt text",
+            "type": "text",
+            "default": "Modular website interface preview"
+        },
+        "background_color": {
+            "label": "Background color",
+            "type": "color",
+            "default": "#f6f8fb"
+        },
+        "text_color": {
+            "label": "Text color",
+            "type": "color",
+            "default": "#172033"
+        }
+    }
+}
