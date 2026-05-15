@@ -11,32 +11,32 @@
         "eyebrow": {
             "label": "Eyebrow",
             "type": "text",
-            "default": ""
+            "default": "About section"
         },
         "heading": {
             "label": "Heading",
             "type": "text",
-            "default": ""
+            "default": "Tell visitors what makes your brand or service different."
         },
         "content": {
             "label": "Content",
             "type": "textarea",
-            "default": ""
+            "default": "Use this section to share your story, process, mission, or the main reason customers should trust your business."
         },
         "feature_one": {
             "label": "Feature one",
             "type": "text",
-            "default": ""
+            "default": "Lightweight and fast"
         },
         "feature_two": {
             "label": "Feature two",
             "type": "text",
-            "default": ""
+            "default": "Easy to update"
         },
         "feature_three": {
             "label": "Feature three",
             "type": "text",
-            "default": ""
+            "default": "Built for growth"
         },
         "image": {
             "label": "About image",
@@ -46,7 +46,7 @@
         "image_alt": {
             "label": "Image alt text",
             "type": "plain_text",
-            "default": ""
+            "default": "About image placeholder"
         },
         "background_color": {
             "label": "Background color",

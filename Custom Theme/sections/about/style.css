@@ -14,8 +14,7 @@
     min-width: 0;
 }
 
-.sls-about__image,
-.sls-about__media {
+.sls-about__image {
     width: 100%;
     border-radius: var(--sls-radius-lg);
     box-shadow: var(--sls-shadow-soft);
@@ -24,6 +23,10 @@
 .sls-about__image {
     aspect-ratio: 5 / 4;
     object-fit: cover;
+}
+
+.sls-about .sls-placeholder-visual {
+    aspect-ratio: 5 / 4;
 }
 
 .sls-about h2 {
@@ -64,11 +67,6 @@
     border-radius: 999px;
     background: var(--sls-section-accent, var(--sls-color-primary));
     content: "";
-}
-
-.sls-about--no-media .sls-about__grid {
-    grid-template-columns: minmax(0, 820px);
-    justify-content: center;
 }
 
 @media (max-width: 860px) {

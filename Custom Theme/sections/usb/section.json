@@ -11,47 +11,57 @@
         "eyebrow": {
             "label": "Eyebrow",
             "type": "text",
-            "default": ""
+            "default": "Why choose us"
         },
         "heading": {
             "label": "Heading",
             "type": "text",
-            "default": ""
+            "default": "Highlight the key benefits customers care about most."
         },
         "content": {
             "label": "Content",
             "type": "textarea",
-            "default": ""
+            "default": "Use this section to explain your unique selling benefits in a simple, scannable layout."
         },
         "benefit_one_title": {
             "label": "Benefit one title",
             "type": "text",
-            "default": ""
+            "default": "Fast performance"
         },
         "benefit_one_text": {
             "label": "Benefit one text",
             "type": "textarea",
-            "default": ""
+            "default": "Describe the first benefit and why it matters for your visitors."
         },
         "benefit_two_title": {
             "label": "Benefit two title",
             "type": "text",
-            "default": ""
+            "default": "Simple editing"
         },
         "benefit_two_text": {
             "label": "Benefit two text",
             "type": "textarea",
-            "default": ""
+            "default": "Describe how the section makes content management easier."
         },
         "benefit_three_title": {
             "label": "Benefit three title",
             "type": "text",
-            "default": ""
+            "default": "Scalable structure"
         },
         "benefit_three_text": {
             "label": "Benefit three text",
             "type": "textarea",
-            "default": ""
+            "default": "Describe how this system can grow with future pages and sections."
+        },
+        "image": {
+            "label": "USB image",
+            "type": "image",
+            "default": 0
+        },
+        "image_alt": {
+            "label": "Image alt text",
+            "type": "plain_text",
+            "default": "USB image placeholder"
         },
         "background_color": {
             "label": "Background color",

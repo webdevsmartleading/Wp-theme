@@ -102,6 +102,42 @@ p {
     text-transform: uppercase;
 }
 
+.sls-placeholder-visual {
+    position: relative;
+    display: grid;
+    min-height: clamp(260px, 34vw, 440px);
+    place-items: center;
+    overflow: hidden;
+    border: 1px solid color-mix(in srgb, var(--sls-section-accent, var(--sls-color-primary)) 22%, transparent);
+    border-radius: var(--sls-radius-lg);
+    background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.58)),
+        repeating-linear-gradient(90deg, color-mix(in srgb, var(--sls-section-accent, var(--sls-color-primary)) 10%, transparent) 0 1px, transparent 1px 42px),
+        repeating-linear-gradient(0deg, color-mix(in srgb, var(--sls-section-accent, var(--sls-color-primary)) 10%, transparent) 0 1px, transparent 1px 42px);
+    box-shadow: var(--sls-shadow-soft);
+}
+
+.sls-placeholder-visual__icon {
+    width: clamp(4.5rem, 12vw, 7rem);
+    aspect-ratio: 1;
+    border: 0.85rem solid color-mix(in srgb, var(--sls-section-accent, var(--sls-color-primary)) 18%, transparent);
+    border-radius: 30%;
+    background: color-mix(in srgb, var(--sls-section-accent, var(--sls-color-primary)) 26%, #ffffff);
+}
+
+.sls-placeholder-visual__label {
+    position: absolute;
+    inset-inline: 1.25rem;
+    bottom: 1.25rem;
+    padding: 0.75rem 1rem;
+    border-radius: var(--sls-radius-md);
+    background: rgba(255, 255, 255, 0.78);
+    color: var(--sls-color-text);
+    font-size: 0.9rem;
+    font-weight: 800;
+    text-align: center;
+}
+
 .sls-button {
     display: inline-flex;
     align-items: center;

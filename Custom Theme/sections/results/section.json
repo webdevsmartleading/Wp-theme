@@ -11,47 +11,57 @@
         "eyebrow": {
             "label": "Eyebrow",
             "type": "text",
-            "default": ""
+            "default": "Results section"
         },
         "heading": {
             "label": "Heading",
             "type": "text",
-            "default": ""
+            "default": "Show measurable outcomes and proof points."
         },
         "content": {
             "label": "Content",
             "type": "textarea",
-            "default": ""
+            "default": "Use this section to communicate the results, numbers, or improvements your audience can expect."
         },
         "result_one_value": {
             "label": "Result one value",
             "type": "text",
-            "default": ""
+            "default": "95%"
         },
         "result_one_label": {
             "label": "Result one label",
             "type": "text",
-            "default": ""
+            "default": "Example improvement metric"
         },
         "result_two_value": {
             "label": "Result two value",
             "type": "text",
-            "default": ""
+            "default": "3x"
         },
         "result_two_label": {
             "label": "Result two label",
             "type": "text",
-            "default": ""
+            "default": "Example growth result"
         },
         "result_three_value": {
             "label": "Result three value",
             "type": "text",
-            "default": ""
+            "default": "24/7"
         },
         "result_three_label": {
             "label": "Result three label",
             "type": "text",
-            "default": ""
+            "default": "Example availability benefit"
+        },
+        "image": {
+            "label": "Results image",
+            "type": "image",
+            "default": 0
+        },
+        "image_alt": {
+            "label": "Image alt text",
+            "type": "plain_text",
+            "default": "Results image placeholder"
         },
         "background_color": {
             "label": "Background color",

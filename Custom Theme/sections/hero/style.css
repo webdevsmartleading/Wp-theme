@@ -29,16 +29,6 @@
     font-size: clamp(1.08rem, 2vw, 1.25rem);
 }
 
-.sls-hero--no-media .sls-hero__grid {
-    grid-template-columns: minmax(0, 820px);
-    justify-content: center;
-    text-align: center;
-}
-
-.sls-hero--no-media .sls-hero__text {
-    margin-inline: auto;
-}
-
 .sls-hero__visual {
     position: relative;
 }
@@ -63,6 +53,10 @@
 .sls-hero__image {
     aspect-ratio: 4 / 3;
     object-fit: cover;
+}
+
+.sls-hero .sls-placeholder-visual {
+    aspect-ratio: 4 / 3;
 }
 
 @media (max-width: 860px) {

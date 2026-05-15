@@ -12,27 +12,27 @@
         "eyebrow": {
             "label": "Eyebrow",
             "type": "text",
-            "default": ""
+            "default": "Hero section"
         },
         "heading": {
             "label": "Heading",
             "type": "text",
-            "default": ""
+            "default": "Add your main website headline here."
         },
         "content": {
             "label": "Content",
             "type": "textarea",
-            "default": ""
+            "default": "Use this hero section to introduce the page, explain the offer, and guide visitors toward the next action."
         },
         "button_label": {
             "label": "Button label",
             "type": "text",
-            "default": ""
+            "default": "Get started"
         },
         "button_url": {
             "label": "Button URL",
             "type": "url",
-            "default": ""
+            "default": "#"
         },
         "image": {
             "label": "Hero image",
@@ -42,7 +42,7 @@
         "image_alt": {
             "label": "Image alt text",
             "type": "plain_text",
-            "default": ""
+            "default": "Hero image placeholder"
         },
         "background_color": {
             "label": "Background color",

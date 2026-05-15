@@ -20,7 +20,7 @@ $has_image = ! empty($settings['image']);
 
 <section
     id="<?php echo esc_attr($section_id); ?>"
-    class="sls-section sls-hero <?php echo $has_image ? 'sls-hero--has-media' : 'sls-hero--no-media'; ?>"
+    class="sls-section sls-hero <?php echo $has_image ? 'sls-hero--has-media' : 'sls-hero--has-placeholder'; ?>"
     style="<?php echo esc_attr($style); ?>"
     aria-labelledby="<?php echo esc_attr($section_id); ?>-heading"
 >
@@ -47,10 +47,12 @@ $has_image = ! empty($settings['image']);
             <?php endif; ?>
         </div>
 
-        <?php if ($has_image) : ?>
-            <div class="sls-hero__visual">
+        <div class="sls-hero__visual">
+            <?php if ($has_image) : ?>
                 <?php sls_render_attachment_image($settings['image'], $settings['image_alt'], 'large', 'sls-hero__image', 'eager'); ?>
-            </div>
-        <?php endif; ?>
+            <?php else : ?>
+                <?php sls_render_placeholder_visual(__('Hero image placeholder', 'sls-theme')); ?>
+            <?php endif; ?>
+        </div>
     </div>
 </section>

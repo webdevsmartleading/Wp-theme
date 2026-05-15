@@ -336,6 +336,16 @@ function sls_render_attachment_image($attachment_id, $alt = '', $size = 'large',
     );
 }
 
+function sls_render_placeholder_visual($label = '') {
+    $label = $label ? $label : __('Image placeholder', 'sls-theme');
+    ?>
+    <div class="sls-placeholder-visual" role="img" aria-label="<?php echo esc_attr($label); ?>">
+        <span class="sls-placeholder-visual__icon" aria-hidden="true"></span>
+        <span class="sls-placeholder-visual__label"><?php echo esc_html($label); ?></span>
+    </div>
+    <?php
+}
+
 function sls_has_text_value($value) {
     if (! is_scalar($value)) {
         return false;
