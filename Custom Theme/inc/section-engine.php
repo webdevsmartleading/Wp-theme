@@ -86,30 +86,36 @@ function sls_get_default_sections() {
 
 function sls_sanitize_section_setting($value, $field) {
     $type = isset($field['type']) ? sanitize_key($field['type']) : 'text';
+    $default = sls_get_field_default($field);
 
     switch ($type) {
         case 'color':
-            return sanitize_hex_color($value) ?: sls_get_field_default($field);
+            $value = is_scalar($value) ? (string) $value : '';
+            return sanitize_hex_color($value) ?: $default;
 
         case 'image':
             return absint($value);
 
         case 'url':
+            $value = is_scalar($value) ? (string) $value : '';
             return esc_url_raw($value);
 
         case 'textarea':
+            $value = is_scalar($value) ? (string) $value : '';
             return wp_kses_post($value);
 
         case 'select':
             $options = is_array($field['options'] ?? null) ? $field['options'] : array();
+            $value = is_scalar($value) ? (string) $value : '';
             $key = sanitize_key($value);
-            return array_key_exists($key, $options) ? $key : sls_get_field_default($field);
+            return array_key_exists($key, $options) ? $key : $default;
 
         case 'number':
-            return is_numeric($value) ? (float) $value : sls_get_field_default($field);
+            return is_numeric($value) ? (float) $value : $default;
 
         case 'text':
         default:
+            $value = is_scalar($value) ? (string) $value : '';
             return sanitize_text_field($value);
     }
 }
