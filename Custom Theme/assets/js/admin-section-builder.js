@@ -2,6 +2,7 @@
     const config = window.SLSSectionBuilder || {};
     const schemas = config.schemas || {};
     const root = document.getElementById('sls-section-builder');
+    const metaKey = config.metaKey || '_sls_page_sections';
 
     if (!root) {
         return;
@@ -34,8 +35,26 @@
     }
 
     function syncInput() {
+        const value = JSON.stringify(sections);
+
         if (input) {
-            input.value = JSON.stringify(sections);
+            input.value = value;
+        }
+
+        if (window.wp && window.wp.data && typeof window.wp.data.dispatch === 'function') {
+            try {
+                const editorStore = window.wp.data.select('core/editor');
+
+                if (editorStore && window.wp.data.dispatch('core/editor').editPost) {
+                    window.wp.data.dispatch('core/editor').editPost({
+                        meta: {
+                            [metaKey]: value,
+                        },
+                    });
+                }
+            } catch (error) {
+                // Classic editor saves through the hidden input instead.
+            }
         }
     }
 
