@@ -1,35 +1,32 @@
 <?php get_header(); ?>
 
-<section class="hero">
-    <div class="container">
+<main id="primary" class="site-main">
+    <?php if (is_singular('page') || is_front_page()) : ?>
+        <?php sls_render_page_sections(); ?>
 
-        <h1>Welcome to My Website</h1>
-
-        <p>
-            Simple lightweight WordPress theme.
-        </p>
-
-    </div>
-</section>
-
-<div class="container">
-
-    <?php if(have_posts()) : ?>
-
-        <?php while(have_posts()) : the_post(); ?>
-
-            <article>
-
-                <h2><?php the_title(); ?></h2>
-
-                <?php the_content(); ?>
-
-            </article>
-
-        <?php endwhile; ?>
-
+        <?php if (have_posts()) : ?>
+            <?php while (have_posts()) : the_post(); ?>
+                <?php if (trim(wp_strip_all_tags(get_the_content()))) : ?>
+                    <div class="sls-container sls-page-content">
+                        <article id="post-<?php the_ID(); ?>" <?php post_class('sls-entry'); ?>>
+                            <?php the_content(); ?>
+                        </article>
+                    </div>
+                <?php endif; ?>
+            <?php endwhile; ?>
+        <?php endif; ?>
+    <?php elseif (have_posts()) : ?>
+        <div class="sls-container sls-post-list">
+            <?php while (have_posts()) : the_post(); ?>
+                <article id="post-<?php the_ID(); ?>" <?php post_class('sls-entry'); ?>>
+                    <h2>
+                        <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+                    </h2>
+                    <?php the_excerpt(); ?>
+                </article>
+            <?php endwhile; ?>
+        </div>
     <?php endif; ?>
-
-</div>
+</main>
 
 <?php get_footer(); ?>

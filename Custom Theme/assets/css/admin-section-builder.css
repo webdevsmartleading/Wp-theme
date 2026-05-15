@@ -1,0 +1,108 @@
+.sls-section-builder-help {
+    max-width: 760px;
+    color: #50575e;
+}
+
+.sls-section-builder {
+    display: grid;
+    gap: 16px;
+}
+
+.sls-builder-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    padding: 14px;
+    border: 1px solid #dcdcde;
+    border-radius: 8px;
+    background: #f6f7f7;
+}
+
+.sls-builder-toolbar select {
+    min-width: 220px;
+}
+
+.sls-builder-empty {
+    padding: 24px;
+    border: 1px dashed #c3c4c7;
+    border-radius: 8px;
+    color: #646970;
+    text-align: center;
+}
+
+.sls-section-card {
+    overflow: hidden;
+    border: 1px solid #dcdcde;
+    border-radius: 10px;
+    background: #fff;
+}
+
+.sls-section-card__header {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 16px;
+    border-bottom: 1px solid #dcdcde;
+    background: #f6f7f7;
+}
+
+.sls-section-card__title {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.sls-section-card__description {
+    margin: 4px 0 0;
+    color: #646970;
+    font-size: 12px;
+}
+
+.sls-section-card__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.sls-section-card__body {
+    display: grid;
+    gap: 14px;
+    padding: 16px;
+}
+
+.sls-builder-field {
+    display: grid;
+    gap: 6px;
+}
+
+.sls-builder-field label {
+    font-weight: 600;
+}
+
+.sls-builder-field input[type="text"],
+.sls-builder-field input[type="url"],
+.sls-builder-field input[type="number"],
+.sls-builder-field textarea,
+.sls-builder-field select {
+    width: 100%;
+    max-width: 760px;
+}
+
+.sls-builder-field textarea {
+    min-height: 92px;
+}
+
+.sls-image-field {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+}
+
+.sls-image-field__value {
+    color: #646970;
+    font-size: 12px;
+}
