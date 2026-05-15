@@ -29,6 +29,7 @@ $style = sprintf(
     esc_attr($settings['text_color']),
     esc_attr($settings['accent_color'])
 );
+$has_image = ! empty($settings['image']);
 ?>
 
 <section
@@ -54,22 +55,32 @@ $style = sprintf(
             <?php endif; ?>
         </div>
 
-        <div class="sls-results__metrics">
-            <?php foreach ($results as $result) : ?>
-                <?php if (! sls_has_text_value($result['value']) && ! sls_has_text_value($result['label'])) : ?>
-                    <?php continue; ?>
+        <div class="sls-results__proof">
+            <div class="sls-results__media">
+                <?php if ($has_image) : ?>
+                    <?php sls_render_attachment_image($settings['image'], $settings['image_alt'], 'large', 'sls-results__image'); ?>
+                <?php else : ?>
+                    <?php sls_render_placeholder_visual(__('Results image placeholder', 'sls-theme')); ?>
                 <?php endif; ?>
+            </div>
 
-                <article class="sls-results__metric">
-                    <?php if (sls_has_text_value($result['value'])) : ?>
-                        <strong><?php sls_render_html_setting($result['value']); ?></strong>
+            <div class="sls-results__metrics">
+                <?php foreach ($results as $result) : ?>
+                    <?php if (! sls_has_text_value($result['value']) && ! sls_has_text_value($result['label'])) : ?>
+                        <?php continue; ?>
                     <?php endif; ?>
 
-                    <?php if (sls_has_text_value($result['label'])) : ?>
-                        <span><?php sls_render_html_setting($result['label']); ?></span>
-                    <?php endif; ?>
-                </article>
-            <?php endforeach; ?>
+                    <article class="sls-results__metric">
+                        <?php if (sls_has_text_value($result['value'])) : ?>
+                            <strong><?php sls_render_html_setting($result['value']); ?></strong>
+                        <?php endif; ?>
+
+                        <?php if (sls_has_text_value($result['label'])) : ?>
+                            <span><?php sls_render_html_setting($result['label']); ?></span>
+                        <?php endif; ?>
+                    </article>
+                <?php endforeach; ?>
+            </div>
         </div>
     </div>
 </section>

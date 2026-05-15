@@ -9,6 +9,28 @@ if (! defined('ABSPATH')) {
 
 const SLS_SECTION_META_KEY = '_sls_page_sections';
 
+function sls_sanitize_sections_meta_for_storage($value) {
+    return wp_json_encode(sls_normalize_sections(sls_decode_sections_json($value)));
+}
+
+function sls_register_sections_meta() {
+    register_post_meta(
+        'page',
+        SLS_SECTION_META_KEY,
+        array(
+            'type'              => 'string',
+            'single'            => true,
+            'show_in_rest'      => true,
+            'sanitize_callback' => 'sls_sanitize_sections_meta_for_storage',
+            'auth_callback'     => function ($allowed, $meta_key, $post_id) {
+                return current_user_can('edit_post', $post_id);
+            },
+            'default'           => '[]',
+        )
+    );
+}
+add_action('init', 'sls_register_sections_meta');
+
 function sls_get_section_registry() {
     static $registry = null;
 
@@ -188,7 +210,7 @@ function sls_normalize_sections($sections) {
             $safe_key = sanitize_key($field_key);
 
             if (array_key_exists($safe_key, $raw_settings)) {
-                $settings[$safe_key] = sls_sanitize_section_setting(wp_unslash($raw_settings[$safe_key]), $field);
+                $settings[$safe_key] = sls_sanitize_section_setting($raw_settings[$safe_key], $field);
             }
         }
 
@@ -217,9 +239,17 @@ function sls_decode_sections_json($json) {
         return array();
     }
 
-    $decoded = json_decode(wp_unslash($json), true);
+    $candidates = array($json, wp_unslash($json));
 
-    return is_array($decoded) ? $decoded : array();
+    foreach (array_unique($candidates) as $candidate) {
+        $decoded = json_decode($candidate, true);
+
+        if (is_array($decoded)) {
+            return $decoded;
+        }
+    }
+
+    return array();
 }
 
 function sls_get_page_sections($post_id = null) {
@@ -304,6 +334,16 @@ function sls_render_attachment_image($attachment_id, $alt = '', $size = 'large',
             'decoding' => 'async',
         )
     );
+}
+
+function sls_render_placeholder_visual($label = '') {
+    $label = $label ? $label : __('Image placeholder', 'sls-theme');
+    ?>
+    <div class="sls-placeholder-visual" role="img" aria-label="<?php echo esc_attr($label); ?>">
+        <span class="sls-placeholder-visual__icon" aria-hidden="true"></span>
+        <span class="sls-placeholder-visual__label"><?php echo esc_html($label); ?></span>
+    </div>
+    <?php
 }
 
 function sls_has_text_value($value) {

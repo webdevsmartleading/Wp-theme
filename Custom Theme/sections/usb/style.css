@@ -3,9 +3,16 @@
     color: var(--sls-section-text, var(--sls-color-text));
 }
 
+.sls-usb__intro-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 0.95fr) minmax(280px, 0.72fr);
+    gap: clamp(2rem, 6vw, 5rem);
+    align-items: center;
+    margin-bottom: clamp(2rem, 5vw, 3.5rem);
+}
+
 .sls-usb__header {
     max-width: 760px;
-    margin-bottom: clamp(2rem, 5vw, 3.5rem);
 }
 
 .sls-usb h2,
@@ -19,6 +26,19 @@
 
 .sls-usb__intro {
     max-width: 680px;
+}
+
+.sls-usb__image {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    border-radius: var(--sls-radius-lg);
+    object-fit: cover;
+    box-shadow: var(--sls-shadow-soft);
+}
+
+.sls-usb .sls-placeholder-visual {
+    aspect-ratio: 4 / 3;
+    min-height: 280px;
 }
 
 .sls-usb__grid {
@@ -60,6 +80,7 @@
 }
 
 @media (max-width: 900px) {
+    .sls-usb__intro-grid,
     .sls-usb__grid {
         grid-template-columns: 1fr;
     }

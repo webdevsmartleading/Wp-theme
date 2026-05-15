@@ -71,7 +71,7 @@ function sls_enqueue_admin_section_builder($hook) {
     wp_enqueue_script(
         'sls-admin-section-builder',
         SLS_THEME_URI . '/assets/js/admin-section-builder.js',
-        array(),
+        array('wp-data'),
         filemtime(SLS_THEME_PATH . '/assets/js/admin-section-builder.js'),
         true
     );
@@ -84,6 +84,7 @@ function sls_enqueue_admin_section_builder($hook) {
         array(
             'schemas'     => sls_prepare_registry_for_admin(),
             'sections'    => sls_get_page_sections($post_id),
+            'metaKey'     => SLS_SECTION_META_KEY,
             'mediaTitle'  => __('Select image', 'sls-theme'),
             'mediaButton' => __('Use this image', 'sls-theme'),
             'i18n'        => array(
@@ -131,7 +132,7 @@ function sls_save_page_sections($post_id) {
         return;
     }
 
-    $raw_sections = isset($_POST['sls_page_sections']) ? wp_unslash($_POST['sls_page_sections']) : '[]';
+    $raw_sections = isset($_POST['sls_page_sections']) ? $_POST['sls_page_sections'] : '[]';
     $sections = sls_normalize_sections(sls_decode_sections_json($raw_sections));
 
     update_post_meta($post_id, SLS_SECTION_META_KEY, wp_json_encode($sections));

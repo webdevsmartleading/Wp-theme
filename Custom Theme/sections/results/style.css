@@ -23,9 +23,23 @@
     font-size: clamp(1rem, 2vw, 1.14rem);
 }
 
+.sls-results__proof,
 .sls-results__metrics {
     display: grid;
     gap: 1rem;
+}
+
+.sls-results__image {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    border-radius: var(--sls-radius-lg);
+    object-fit: cover;
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.18);
+}
+
+.sls-results .sls-placeholder-visual {
+    min-height: 220px;
+    box-shadow: 0 24px 70px rgba(0, 0, 0, 0.18);
 }
 
 .sls-results__metric {

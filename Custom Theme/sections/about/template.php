@@ -25,16 +25,18 @@ $has_image = ! empty($settings['image']);
 
 <section
     id="<?php echo esc_attr($section_id); ?>"
-    class="sls-section sls-about <?php echo $has_image ? 'sls-about--has-media' : 'sls-about--no-media'; ?>"
+    class="sls-section sls-about <?php echo $has_image ? 'sls-about--has-media' : 'sls-about--has-placeholder'; ?>"
     style="<?php echo esc_attr($style); ?>"
     aria-labelledby="<?php echo esc_attr($section_id); ?>-heading"
 >
     <div class="sls-container sls-about__grid">
-        <?php if ($has_image) : ?>
-            <div class="sls-about__media">
+        <div class="sls-about__media">
+            <?php if ($has_image) : ?>
                 <?php sls_render_attachment_image($settings['image'], $settings['image_alt'], 'large', 'sls-about__image'); ?>
-            </div>
-        <?php endif; ?>
+            <?php else : ?>
+                <?php sls_render_placeholder_visual(__('About image placeholder', 'sls-theme')); ?>
+            <?php endif; ?>
+        </div>
 
         <div class="sls-about__content">
             <?php if (sls_has_text_value($settings['eyebrow'])) : ?>
