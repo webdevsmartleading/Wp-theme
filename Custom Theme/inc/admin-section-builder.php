@@ -88,7 +88,7 @@ function sls_enqueue_admin_section_builder($hook) {
             'mediaButton' => __('Use this image', 'sls-theme'),
             'i18n'        => array(
                 'addSection' => __('Add section', 'sls-theme'),
-                'empty'      => __('No sections added yet. Add Hero or About to build this page.', 'sls-theme'),
+                'empty'      => __('No sections added yet. Add Hero, USB, Results, or About to build this page.', 'sls-theme'),
                 'remove'     => __('Remove', 'sls-theme'),
                 'moveUp'     => __('Move up', 'sls-theme'),
                 'moveDown'   => __('Move down', 'sls-theme'),

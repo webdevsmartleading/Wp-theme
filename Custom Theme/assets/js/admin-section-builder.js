@@ -110,11 +110,15 @@
         label.textContent = field.label || fieldKey;
         wrapper.appendChild(label);
 
-        if (field.type === 'textarea') {
+        if (field.type === 'textarea' || field.type === 'css') {
             const textarea = document.createElement('textarea');
             textarea.id = fieldId;
             textarea.placeholder = field.placeholder || '';
             textarea.value = value;
+            if (field.type === 'css') {
+                wrapper.className += ' sls-builder-field--css';
+                textarea.spellcheck = false;
+            }
             textarea.addEventListener('input', function () {
                 updateSetting(index, fieldKey, textarea.value);
             });
