@@ -35,12 +35,30 @@ function sls_get_section_registry() {
         $schema['name'] = sanitize_text_field($schema['name'] ?? ucfirst($slug));
         $schema['description'] = sanitize_text_field($schema['description'] ?? '');
         $schema['fields'] = is_array($schema['fields'] ?? null) ? $schema['fields'] : array();
+        $schema['fields']['custom_css'] = array(
+            'label'       => __('Custom CSS for this section', 'sls-theme'),
+            'type'        => 'css',
+            'default'     => '',
+            'placeholder' => '.section-title { color: #2458ff; }',
+        );
         $schema['assets'] = is_array($schema['assets'] ?? null) ? $schema['assets'] : array();
+        $schema['order'] = absint($schema['order'] ?? 100);
         $schema['path'] = dirname($schema_file);
         $schema['uri'] = SLS_THEME_URI . '/sections/' . $schema['slug'];
 
         $registry[$schema['slug']] = $schema;
     }
+
+    uasort(
+        $registry,
+        function ($first, $second) {
+            if ($first['order'] === $second['order']) {
+                return strcmp($first['name'], $second['name']);
+            }
+
+            return $first['order'] <=> $second['order'];
+        }
+    );
 
     return $registry;
 }
@@ -77,11 +95,28 @@ function sls_get_default_sections() {
             'settings' => sls_get_section_defaults('hero'),
         ),
         array(
+            'id'       => 'usb-demo',
+            'type'     => 'usb',
+            'settings' => sls_get_section_defaults('usb'),
+        ),
+        array(
+            'id'       => 'results-demo',
+            'type'     => 'results',
+            'settings' => sls_get_section_defaults('results'),
+        ),
+        array(
             'id'       => 'about-demo',
             'type'     => 'about',
             'settings' => sls_get_section_defaults('about'),
         ),
     );
+}
+
+function sls_sanitize_section_css($css) {
+    $css = is_scalar($css) ? (string) $css : '';
+    $css = preg_replace('#</?style[^>]*>#i', '', $css);
+
+    return trim(wp_strip_all_tags($css));
 }
 
 function sls_sanitize_section_setting($value, $field) {
@@ -104,6 +139,13 @@ function sls_sanitize_section_setting($value, $field) {
             $value = is_scalar($value) ? (string) $value : '';
             return wp_kses_post($value);
 
+        case 'css':
+            return sls_sanitize_section_css($value);
+
+        case 'plain_text':
+            $value = is_scalar($value) ? (string) $value : '';
+            return sanitize_text_field($value);
+
         case 'select':
             $options = is_array($field['options'] ?? null) ? $field['options'] : array();
             $value = is_scalar($value) ? (string) $value : '';
@@ -116,7 +158,7 @@ function sls_sanitize_section_setting($value, $field) {
         case 'text':
         default:
             $value = is_scalar($value) ? (string) $value : '';
-            return sanitize_text_field($value);
+            return wp_kses_post($value);
     }
 }
 
@@ -187,7 +229,7 @@ function sls_get_page_sections($post_id = null) {
         return sls_normalize_sections(sls_decode_sections_json(get_post_meta($post_id, SLS_SECTION_META_KEY, true)));
     }
 
-    return sls_normalize_sections(sls_get_default_sections());
+    return array();
 }
 
 function sls_get_active_sections() {
@@ -203,7 +245,13 @@ function sls_enqueue_section_assets() {
     $active_types = array();
 
     foreach (sls_get_active_sections() as $section) {
-        $active_types[$section['type']] = true;
+        $type = $section['type'];
+
+        if (! isset($registry[$type]) || ! sls_section_has_visible_content($section, $registry[$type])) {
+            continue;
+        }
+
+        $active_types[$type] = true;
     }
 
     foreach (array_keys($active_types) as $type) {
@@ -258,6 +306,118 @@ function sls_render_attachment_image($attachment_id, $alt = '', $size = 'large',
     );
 }
 
+function sls_has_text_value($value) {
+    if (! is_scalar($value)) {
+        return false;
+    }
+
+    return '' !== trim(wp_kses_post((string) $value));
+}
+
+function sls_section_has_visible_content($section, $schema) {
+    $settings = is_array($section['settings'] ?? null) ? $section['settings'] : array();
+
+    foreach ($schema['fields'] as $field_key => $field) {
+        $field_type = isset($field['type']) ? sanitize_key($field['type']) : 'text';
+        $safe_key = sanitize_key($field_key);
+        $value = $settings[$safe_key] ?? '';
+
+        if (in_array($safe_key, array('custom_css', 'image_alt'), true)) {
+            continue;
+        }
+
+        if ('button_label' === $safe_key && empty($settings['button_url'])) {
+            continue;
+        }
+
+        if (in_array($field_type, array('color', 'css', 'plain_text', 'select', 'number', 'url'), true)) {
+            continue;
+        }
+
+        if ('image' === $field_type && absint($value)) {
+            return true;
+        }
+
+        if (in_array($field_type, array('text', 'textarea'), true) && sls_has_text_value($value)) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
+function sls_render_html_setting($value, $autop = false) {
+    if (! sls_has_text_value($value)) {
+        return;
+    }
+
+    $html = wp_kses_post((string) $value);
+
+    echo $autop ? wpautop($html) : $html;
+}
+
+function sls_scope_css_selectors($selectors, $scope) {
+    $scoped = array();
+
+    foreach (explode(',', $selectors) as $selector) {
+        $selector = trim($selector);
+
+        if ('' === $selector) {
+            continue;
+        }
+
+        if (0 === strpos($selector, '&')) {
+            $scoped[] = $scope . substr($selector, 1);
+            continue;
+        }
+
+        if (0 === strpos($selector, $scope)) {
+            $scoped[] = $selector;
+            continue;
+        }
+
+        $scoped[] = $scope . ' ' . $selector;
+    }
+
+    return implode(', ', $scoped);
+}
+
+function sls_scope_custom_css($css, $section_id) {
+    $css = sls_sanitize_section_css($css);
+
+    if ('' === $css) {
+        return '';
+    }
+
+    $scope = '#' . sanitize_html_class($section_id);
+
+    if (false === strpos($css, '{')) {
+        return $scope . " {\n" . $css . "\n}";
+    }
+
+    return preg_replace_callback(
+        '/(^|[{}])\s*([^@{}][^{}]*)\s*\{/',
+        function ($matches) use ($scope) {
+            return $matches[1] . ' ' . sls_scope_css_selectors($matches[2], $scope) . ' {';
+        },
+        $css
+    );
+}
+
+function sls_render_scoped_custom_css($section_id, $settings) {
+    $custom_css = sls_scope_custom_css($settings['custom_css'] ?? '', $section_id);
+
+    if ('' === $custom_css) {
+        return;
+    }
+
+    printf(
+        '<style id="%1$s">%2$s</style>',
+        esc_attr('sls-custom-css-' . $section_id),
+        $custom_css
+    );
+}
+
 function sls_render_page_sections($sections = null) {
     $sections = null === $sections ? sls_get_page_sections() : sls_normalize_sections($sections);
     $registry = sls_get_section_registry();
@@ -271,9 +431,14 @@ function sls_render_page_sections($sections = null) {
             continue;
         }
 
+        if (! sls_section_has_visible_content($section, $registry[$section_type])) {
+            continue;
+        }
+
         $template = $registry[$section_type]['path'] . '/template.php';
 
         if (file_exists($template)) {
+            sls_render_scoped_custom_css($section_id, $settings);
             include $template;
         }
     }

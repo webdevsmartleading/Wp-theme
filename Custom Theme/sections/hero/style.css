@@ -1,7 +1,7 @@
 .sls-hero {
     overflow: hidden;
     background:
-        radial-gradient(circle at top right, rgba(36, 88, 255, 0.16), transparent 34rem),
+        radial-gradient(circle at top right, color-mix(in srgb, var(--sls-section-accent, var(--sls-color-primary)) 18%, transparent), transparent 34rem),
         var(--sls-section-bg, var(--sls-color-surface));
     color: var(--sls-section-text, var(--sls-color-text));
 }
@@ -29,6 +29,16 @@
     font-size: clamp(1.08rem, 2vw, 1.25rem);
 }
 
+.sls-hero--no-media .sls-hero__grid {
+    grid-template-columns: minmax(0, 820px);
+    justify-content: center;
+    text-align: center;
+}
+
+.sls-hero--no-media .sls-hero__text {
+    margin-inline: auto;
+}
+
 .sls-hero__visual {
     position: relative;
 }
@@ -37,13 +47,12 @@
     position: absolute;
     inset: 12% -6% -6% 10%;
     border-radius: var(--sls-radius-lg);
-    background: rgba(36, 88, 255, 0.14);
+    background: color-mix(in srgb, var(--sls-section-accent, var(--sls-color-primary)) 15%, transparent);
     content: "";
     transform: rotate(4deg);
 }
 
-.sls-hero__image,
-.sls-hero__placeholder {
+.sls-hero__image {
     position: relative;
     width: 100%;
     border: 1px solid rgba(255, 255, 255, 0.75);
@@ -54,42 +63,6 @@
 .sls-hero__image {
     aspect-ratio: 4 / 3;
     object-fit: cover;
-}
-
-.sls-hero__placeholder {
-    display: grid;
-    min-height: clamp(300px, 38vw, 480px);
-    place-items: center;
-    background:
-        linear-gradient(135deg, rgba(255, 255, 255, 0.96), rgba(255, 255, 255, 0.72)),
-        repeating-linear-gradient(90deg, rgba(36, 88, 255, 0.1) 0 1px, transparent 1px 48px),
-        repeating-linear-gradient(0deg, rgba(36, 88, 255, 0.1) 0 1px, transparent 1px 48px);
-}
-
-.sls-hero__placeholder span {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 86px;
-    min-height: 86px;
-    border-radius: 24px;
-    background: var(--sls-color-text);
-    color: #ffffff;
-    font-weight: 850;
-    letter-spacing: 0.08em;
-}
-
-.sls-hero__placeholder span:nth-child(1) {
-    transform: translate(36px, 12px) rotate(-8deg);
-}
-
-.sls-hero__placeholder span:nth-child(2) {
-    background: var(--sls-color-primary);
-    transform: translate(-42px, -6px) rotate(5deg);
-}
-
-.sls-hero__placeholder span:nth-child(3) {
-    transform: translate(28px, -18px) rotate(9deg);
 }
 
 @media (max-width: 860px) {

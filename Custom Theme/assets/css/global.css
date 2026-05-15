@@ -94,7 +94,7 @@ p {
 
 .sls-section__eyebrow {
     margin-bottom: 0.85rem;
-    color: var(--sls-eyebrow-color, var(--sls-color-primary));
+    color: var(--sls-eyebrow-color, var(--sls-section-accent, var(--sls-color-primary)));
     font-size: 0.78rem;
     font-weight: 800;
     letter-spacing: 0.16em;
@@ -109,7 +109,7 @@ p {
     min-height: 3.25rem;
     padding: 0.85rem 1.35rem;
     border-radius: 999px;
-    background: var(--sls-button-bg, var(--sls-color-primary));
+    background: var(--sls-button-bg, var(--sls-section-accent, var(--sls-color-primary)));
     color: var(--sls-button-color, #ffffff);
     font-weight: 750;
     line-height: 1;

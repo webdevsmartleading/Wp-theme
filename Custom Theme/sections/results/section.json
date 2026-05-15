@@ -1,9 +1,9 @@
 {
-    "slug": "about",
-    "name": "About",
-    "description": "Two-column content section for explaining the framework or business.",
+    "slug": "results",
+    "name": "Results",
+    "description": "Outcome-focused section with supporting copy and up to three result metrics.",
     "version": "1.0.0",
-    "order": 40,
+    "order": 30,
     "assets": {
         "style": "style.css"
     },
@@ -23,45 +23,50 @@
             "type": "textarea",
             "default": ""
         },
-        "feature_one": {
-            "label": "Feature one",
+        "result_one_value": {
+            "label": "Result one value",
             "type": "text",
             "default": ""
         },
-        "feature_two": {
-            "label": "Feature two",
+        "result_one_label": {
+            "label": "Result one label",
             "type": "text",
             "default": ""
         },
-        "feature_three": {
-            "label": "Feature three",
+        "result_two_value": {
+            "label": "Result two value",
             "type": "text",
             "default": ""
         },
-        "image": {
-            "label": "About image",
-            "type": "image",
-            "default": 0
+        "result_two_label": {
+            "label": "Result two label",
+            "type": "text",
+            "default": ""
         },
-        "image_alt": {
-            "label": "Image alt text",
-            "type": "plain_text",
+        "result_three_value": {
+            "label": "Result three value",
+            "type": "text",
+            "default": ""
+        },
+        "result_three_label": {
+            "label": "Result three label",
+            "type": "text",
             "default": ""
         },
         "background_color": {
             "label": "Background color",
             "type": "color",
-            "default": "#ffffff"
+            "default": "#172033"
         },
         "text_color": {
             "label": "Text color",
             "type": "color",
-            "default": "#172033"
+            "default": "#ffffff"
         },
         "accent_color": {
             "label": "Accent color",
             "type": "color",
-            "default": "#2458ff"
+            "default": "#8fb3ff"
         }
     }
 }
